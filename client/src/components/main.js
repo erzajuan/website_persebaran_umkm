@@ -45,21 +45,6 @@ const Main = () => {
           </Routes>
         )}
 
-        {/* <Routes>
-        <Route path="/" element={<HomePage></HomePage>}></Route>
-        <Route path="/user" element={<User></User>}></Route>
-        <Route path="/item" element={<Item></Item>}></Route>
-        <Route path="/Brand" element={<Brand></Brand>}>
-          <Route path="" element={<ListBrands></ListBrands>}></Route>
-          <Route
-            path="create"
-            element={<CreateBrand></CreateBrand>}
-          ></Route>
-          <Route path="edit">
-            <Route path=":id" element={<EditBrand></EditBrand>}></Route>
-          </Route>
-        </Route>
-      </Routes> */}
       </div>
     </>
   );

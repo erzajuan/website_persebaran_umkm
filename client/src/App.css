@@ -1,10 +1,41 @@
-/* .login-body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-top: 40px;
-  padding-bottom: 40px;
-  height: 100vh;
-  overflow-y: hidden;
-} */
+.external-content {
+  display: none;
+  position: sticky;
+  top: 56px;
+  left: 0;
+  z-index: 999;
+  width: 100%;
+  padding: 10px;
+  background-color: green;
+  border: 1px solid #ced4da;
+}
+
+.link-font {
+  color: white;
+}
+
+.title-font {
+  color: white;
+  font-size: 18pt;
+}
+
+.title-font:hover { 
+  color:#4CAF50
+}
+
+.external-content.show {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .navbar-toggler {
+    border: #f8f9fa;
+    color: #4CAF50;
+    margin-left: 1%;
+    margin-right: 1%;
+    display: block !important;
+    float: none !important;
+    animation: reverse;
+  }
+}
 
