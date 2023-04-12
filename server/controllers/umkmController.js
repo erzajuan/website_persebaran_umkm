@@ -1,10 +1,10 @@
-const { umkm } = require("../models");
+const { umkm, menu } = require("../models");
 const { decrypt } = require("../helpers/bcrypt");
 
 class UmkmController {
   static async getUmkm(req, res) {
     try {
-      let result = await umkm.findAll();
+      let result = await umkm.findAll({ include: [menu] });
       res.status(200).json(result);
     } catch (error) {
       res.status(500).json(error);
@@ -14,7 +14,7 @@ class UmkmController {
   static async detail(req, res) {
     try {
       const id = +req.params.id;
-      let result = await umkm.findByPk(id);
+      let result = await umkm.findByPk(id, { include: [menu] });
       res.status(200).json(result);
     } catch (error) {
       res.status(500).json(error);
@@ -71,23 +71,17 @@ class UmkmController {
   static async update(req, res) {
     try {
       const id = +req.params.id;
-      const { name,
-        location,
-        description,
-        openDays,
-        openTime,
-        map,
-        image,
-      } = req.body;
+      const { name, location, description, openDays, openTime, map, image } =
+        req.body;
       let result = await umkm.update(
         {
-        name,
-        location,
-        description,
-        openDays,
-        openTime,
-        map,
-        image,
+          name,
+          location,
+          description,
+          openDays,
+          openTime,
+          map,
+          image,
         },
         {
           where: { id },

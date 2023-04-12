@@ -7,4 +7,5 @@ menuRoute.post("/", MenuController.create);
 menuRoute.delete("/:id", MenuController.delete);
 menuRoute.put("/:id", MenuController.update);
 
+
 module.exports = menuRoute;
