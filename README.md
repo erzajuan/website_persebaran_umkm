@@ -4,6 +4,7 @@
 
 ## Pages
 
+- Login/RegisterPage (Menampilkan form untuk login ataupun register)
 - HomePage ( Menampilkan Daftar UMKM [ image, name, location ] dengan status "Validated" )
 - ProfilePage ( Menampilkan Profile dari user yang login [ name, email, role ], beserta umkm yang dimiliki )
 - DetailPage ( Menampilkan Detail dari UMKM yang Dipilih [ image, name, location, description, openDays, openTime, map, menus])
