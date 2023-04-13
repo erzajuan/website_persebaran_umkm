@@ -1,4 +1,5 @@
 const { menu } = require("../models");
+const { verifToken } = require("../helpers/auth");
 
 class MenuController {
   static async getMenu(req, res) {
@@ -22,7 +23,11 @@ class MenuController {
 
   static async create(req, res) {
     try {
-      const { name, price, image, umkmId } = req.body;
+      const access_token = req.headers.access_token;
+      let umkmId = verifToken(access_token).umkm.id;
+      const { name, price } = req.body;
+      let { image } = req.body;
+      image == "" ? (image = "https://via.placeholder.com/150") : image;
       let result = await menu.create({
         name,
         price,
