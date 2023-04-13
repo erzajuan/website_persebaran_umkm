@@ -10,13 +10,13 @@ const Main = () => {
     setLoginStatus(result);
   };
 
-  // useEffect(() => {
-  //   if (localStorage.getItem("access_token")) {
-  //     setLoginStatus(true);
-  //   } else {
-  //     setLoginStatus(false);
-  //   }
-  // }, [loginStatus]);
+  useEffect(() => {
+    if (localStorage.getItem("access_token")) {
+      setLoginStatus(true);
+    } else {
+      setLoginStatus(false);
+    }
+  }, [loginStatus]);
 
   return (
     <>

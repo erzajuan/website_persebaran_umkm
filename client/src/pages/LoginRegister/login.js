@@ -1,40 +1,26 @@
 import React, { useState } from "react";
-import {Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./style.css";
+import { login } from "../../fetchs/userFetch";
 
 const Login = (props) => {
   const { loginCbHandler } = props;
 
   const linkStyle = {
     textDecoration: "none",
-    color: 'green'
+    color: "green",
   };
   const navigate = useNavigate();
 
   const [form, setForm] = useState({
-    email: "",
+    username: "",
     password: "",
   });
 
-  const loginUser = async () => {
-      try {
-          // let result = await axios({
-          //     method: 'POST',
-          //     url: 'http://localhost:3000/api/users/login',
-          //     data: form
-          // })
-          // const access_token = result.data.access_token
-          // localStorage.setItem('access_token', access_token)
-          loginCbHandler(true)
-      } catch (err) {
-          console.log(err)
-      }
-  }
-
   const submitHandler = () => {
-      // console.log(form)
-      loginUser()
-  }
+    login(form, loginCbHandler);
+    navigate("/");
+  };
 
   return (
     <>
@@ -43,15 +29,15 @@ const Login = (props) => {
           <h3 class="h1 mb-3 font-weight-bold">SME Hub</h3>
           <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
           <label for="inputEmail" class="sr-only">
-            Email address
+            Username
           </label>
           <input
-            type="email"
-            id="inputEmail"
+            type="text"
+            id="inputUsername"
             class="form-control"
-            placeholder="Email address"
+            placeholder="Username"
             required
-            autofocus
+            onChange={(e) => setForm({ ...form, username: e.target.value })}
           />
           <label for="inputPassword" class="sr-only">
             Password
@@ -62,9 +48,13 @@ const Login = (props) => {
             class="form-control"
             placeholder="Password"
             required
+            onChange={(e) => setForm({ ...form, password: e.target.value })}
           />
           <p class="message">
-            Not registered? <Link style={linkStyle} to="/register">Create an account</Link>
+            Not registered?{" "}
+            <Link style={linkStyle} to="/register">
+              Create an account
+            </Link>
           </p>
           <button
             onClick={() => submitHandler()}

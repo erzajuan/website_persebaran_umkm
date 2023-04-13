@@ -8,13 +8,7 @@ const MainNavbar = (props) => {
 
   const logoutUser = async () => {
     try {
-      // let result = await axios({
-      //     method: 'POST',
-      //     url: 'http://localhost:3000/api/users/login',
-      //     data: form
-      // })
-      // const access_token = result.data.access_token
-      // localStorage.setItem('access_token', access_token)
+      localStorage.removeItem('access_token')
       loginCbHandler(false);
     } catch (err) {
       console.log(err);
