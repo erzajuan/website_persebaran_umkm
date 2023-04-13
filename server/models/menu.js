@@ -30,7 +30,10 @@ module.exports = (sequelize, DataTypes) => {
           },
         },
       },
-      image: DataTypes.STRING,
+      image: {
+        type: DataTypes.STRING,
+        defaultValue: "https://via.placeholder.com/150",
+      },
       umkmId: {
         type: DataTypes.INTEGER,
         validate: {
@@ -42,9 +45,6 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       hooks: {
-        beforeCreate: function (menu, options) {
-          menu.image = "https://via.placeholder.com/150";
-        },
         beforeUpdate: function (menu, options) {
           menu.image = "https://via.placeholder.com/150";
         },

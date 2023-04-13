@@ -1,11 +1,11 @@
 const { user, umkm } = require("../models");
 const { decrypt } = require("../helpers/bcrypt");
-
+const { generateToken, verifToken } = require("../helpers/auth");
 class UserController {
   static async getUser(req, res) {
     try {
       let result = await user.findAll({
-        include: [umkm]
+        include: [umkm],
       });
       res.status(200).json(result);
     } catch (error) {
@@ -27,11 +27,14 @@ class UserController {
     try {
       const { username, password } = req.body;
       let result = await user.findOne({
+        include: [umkm],
         where: { username },
       });
       if (result) {
         if (decrypt(password, result.password)) {
-          res.status(200).json(result);
+          let access_token = generateToken(result);
+          let token = verifToken(access_token);
+          res.status(200).json({ access_token });
         } else {
           res.status(403).json({ message: "Password Salah" });
         }

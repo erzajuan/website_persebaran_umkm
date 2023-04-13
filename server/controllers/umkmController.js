@@ -1,8 +1,19 @@
 const { umkm, menu } = require("../models");
-const { decrypt } = require("../helpers/bcrypt");
+const { verifToken } = require("../helpers/auth");
 
 class UmkmController {
   static async getUmkm(req, res) {
+    try {
+      let result = await umkm.findAll({
+        include: [menu],
+        where: { status: "validated" },
+      });
+      res.status(200).json(result);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  }
+  static async getUmkmAdmin(req, res) {
     try {
       let result = await umkm.findAll({ include: [menu] });
       res.status(200).json(result);
@@ -23,16 +34,11 @@ class UmkmController {
 
   static async create(req, res) {
     try {
-      const {
-        name,
-        location,
-        description,
-        openDays,
-        openTime,
-        map,
-        image,
-        userId,
-      } = req.body;
+      const access_token = req.headers.access_token;
+      let userId = verifToken(access_token).id;
+      const { name, location, description, openDays, openTime, map } = req.body;
+      let { image } = req.body;
+      image == "" ? (image = "https://via.placeholder.com/150") : image;
       let result = await umkm.create({
         name,
         location,

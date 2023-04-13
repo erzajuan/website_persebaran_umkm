@@ -2,6 +2,7 @@ const umkmRoute = require("express").Router();
 const { UmkmController } = require("../controllers");
 
 umkmRoute.get("/", UmkmController.getUmkm);
+umkmRoute.get("/admin", UmkmController.getUmkmAdmin);
 umkmRoute.get("/detail/:id", UmkmController.detail);
 umkmRoute.post("/", UmkmController.create);
 umkmRoute.delete("/:id", UmkmController.delete);
