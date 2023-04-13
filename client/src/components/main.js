@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 
-import Navbar from "./navbar";
-
 import { HomePage, Login, Register } from "../pages";
 
 const Main = () => {

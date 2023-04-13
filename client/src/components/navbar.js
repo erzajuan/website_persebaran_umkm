@@ -39,17 +39,23 @@ const MainNavbar = (props) => {
       </Navbar>
 
       <div className={`external-content ${expanded ? "show" : ""}`}>
-        <Nav>
+        <div class="d-flex flex-wrap">
+        <Nav className="me-auto">
           <Nav.Link href="#" className="link-font">
             Profile
           </Nav.Link>
           <Nav.Link href="#" className="link-font">
             Menu
           </Nav.Link>
-          <Nav.Link href="/" className="link-font ml-auto" onClick={() => logoutHandler()}>
+          
+        </Nav>
+        <Nav >
+        <Nav.Link href="/" className="link-font ml-auto" onClick={() => logoutHandler()}>
             Log Out
           </Nav.Link>
         </Nav>
+        </div>
+        
       </div>
     </div>
   );

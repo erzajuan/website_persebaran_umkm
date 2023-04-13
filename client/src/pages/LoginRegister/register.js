@@ -1,14 +1,23 @@
 import React, { useState } from "react";
 import {Link} from "react-router-dom";
 import "./style.css";
+import { createUser } from "../../fetchs/userFetch";
+import { useNavigate } from "react-router-dom";
 
-const Register = (props) => {
-  const { loginCbHandler } = props;
+const Register = () => {
   const [form, setForm] = useState({
-    name: "",
+    username: "",
     email: "",
     password: "",
   });
+
+
+  const navigation = useNavigate();
+
+  const submitHandler = () => {
+    createUser(form);
+    navigation("/");
+  };
 
   const linkStyle = {
     textDecoration: "none",
@@ -16,44 +25,47 @@ const Register = (props) => {
   };
 
   return (
-    <div class="text-center login-body bg-success bg-gradient" >
-      <form class="form-signin bg-light p-4 shadow-lg rounded">
-        <h3 class="h1 mb-3 font-weight-bold">SME Hub</h3>
-        <h1 class="h3 mb-3 font-weight-normal">Sign Up</h1>
-        <label for="inputName" class="sr-only">
-          Name
+    <div className="text-center login-body bg-success bg-gradient" >
+      <form className="form-signin bg-light p-4 shadow-lg rounded">
+        <h3 className="h1 mb-3 font-weight-bold">SME Hub</h3>
+        <h1 className="h3 mb-3 font-weight-normal">Sign Up</h1>
+        <label className="sr-only">
+          Username
         </label>
         <input
           type="text"
-          id="inputName"
-          class="form-control"
-          placeholder="Name"
+          id="inputUsername"
+          className="form-control"
+          placeholder="Username"
           required
-          autofocus
+          
+          onChange={(e) => setForm({ ...form, username: e.target.value })}
         />
-        <label for="inputEmail" class="sr-only">
+        <label className="sr-only">
           Email address
         </label>
         <input
           type="email"
           id="inputEmail"
-          class="form-control"
+          className="form-control"
           placeholder="Email address"
           required
-          autofocus
+        
+          onChange={(e) => setForm({ ...form, email: e.target.value })}
         />
-        <label for="inputPassword" class="sr-only">
+        <label  className="sr-only">
           Password
         </label>
         <input
           type="password"
           id="inputPassword"
-          class="form-control"
+          className="form-control"
           placeholder="Password"
           required
+          onChange={(e) => setForm({ ...form, password: e.target.value })}
         />
-        <p class="message">Already have an account? <Link to="/" style={linkStyle}>log in</Link></p>
-        <button class="btn btn-lg btn-primary btn-block bg-success" type="submit">
+        <p className="message">Already have an account? <Link to="/" style={linkStyle}>log in</Link></p>
+        <button className="btn btn-lg btn-primary btn-block bg-success" type="submit" onClick={() => submitHandler()} >
           Sign up
         </button>
       </form>
