@@ -1,7 +1,7 @@
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
-const URL = 'localhost:3000/api/umkms';
+const URL = 'http://localhost:3000/api/umkms';
 
 const getUMKMs = async (cb) => {
     try {
@@ -14,3 +14,5 @@ const getUMKMs = async (cb) => {
         console.log(e);
     }
 }
+
+export {getUMKMs};

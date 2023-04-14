@@ -11,7 +11,12 @@
 }
 
 .link-font {
+  margin: 5px;
   color: white;
+}
+
+.link-font:hover {
+  color:#4CAF50
 }
 
 .title-font {

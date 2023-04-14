@@ -8,7 +8,7 @@ const MainNavbar = (props) => {
 
   const logoutUser = async () => {
     try {
-      localStorage.removeItem('access_token')
+      localStorage.removeItem("access_token");
       loginCbHandler(false);
     } catch (err) {
       console.log(err);
@@ -33,23 +33,29 @@ const MainNavbar = (props) => {
       </Navbar>
 
       <div className={`external-content ${expanded ? "show" : ""}`}>
-        <div class="d-flex flex-wrap">
-        <Nav className="me-auto">
-          <Nav.Link href="#" className="link-font">
-            Profile
-          </Nav.Link>
-          <Nav.Link href="#" className="link-font">
-            Menu
-          </Nav.Link>
-          
-        </Nav>
-        <Nav >
-        <Nav.Link href="/" className="link-font ml-auto" onClick={() => logoutHandler()}>
-            Log Out
-          </Nav.Link>
-        </Nav>
+        <div className="d-flex flex-wrap">
+          <Nav className="me-auto">
+            <Link
+              to="/profile"
+              className="link-font"
+              style={{ textDecoration: "none" }}
+            >
+              My Profile
+            </Link>
+            <Link to="#" className="link-font" style={{ textDecoration: "none" }}>
+              My UMKM
+            </Link>
+          </Nav>
+          <Nav>
+            <Nav.Link
+              href="/"
+              className="link-font ml-auto"
+              onClick={() => logoutHandler()}
+            >
+              Log Out
+            </Nav.Link>
+          </Nav>
         </div>
-        
       </div>
     </div>
   );
