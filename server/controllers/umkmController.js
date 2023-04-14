@@ -35,21 +35,28 @@ class UmkmController {
   static async create(req, res) {
     try {
       const access_token = req.headers.access_token;
-      let userId = verifToken(access_token).id;
       const { name, location, description, openDays, openTime, map } = req.body;
+      let userId = verifToken(access_token).id;
+      const checkUMKM = await umkm.findAll({ where: { userId: userId } });
+      let check = false;
       let { image } = req.body;
       image == "" ? (image = "https://via.placeholder.com/150") : image;
-      let result = await umkm.create({
-        name,
-        location,
-        description,
-        openDays,
-        openTime,
-        map,
-        image,
-        userId,
-      });
-      res.status(201).json(result);
+      checkUMKM.length >= 1
+        ? res.status(404).json({ message: "Tidak Dapat Membuat UMKM lagi" })
+        : (check = true);
+      if (check) {
+        let result = await umkm.create({
+          name,
+          location,
+          description,
+          openDays,
+          openTime,
+          map,
+          image,
+          userId,
+        });
+        res.status(201).json(result);
+      }
     } catch (error) {
       res.status(500).json(error);
     }

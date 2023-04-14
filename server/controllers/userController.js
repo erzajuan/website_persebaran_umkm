@@ -115,7 +115,6 @@ class UserController {
         },
         {
           where: { id },
-          individualHooks: true,
         }
       );
       result[0] == 1
