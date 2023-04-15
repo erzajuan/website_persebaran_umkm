@@ -44,6 +44,7 @@ const getUserDetail = async (cb, token) => {
       method: "GET",
       url: URL + `/detail/${userData.id}`,
     });
+    console.log(userData.umkm);
     cb(user.data);
   } catch (e) {
     console.log(e);
@@ -107,4 +108,4 @@ const parseJwt = (token) => {
   return JSON.parse(jsonPayload);
 };
 
-export { login, getUsers, createUser, getUserDetail, updateUser };
+export { login, getUsers, createUser, getUserDetail, updateUser, };

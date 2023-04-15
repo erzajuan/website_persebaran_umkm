@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Pagination } from "react-bootstrap";
 import { getUMKMs } from "../../fetchs/umkmFetch";
+import { Link, useNavigate} from "react-router-dom";
 
 const HomePage = (props) => {
   const [activePage, setActivePage] = useState(1);
   const [umkms, setUmkms] = useState([]);
+  const navigate = useNavigate();
   const itemsPerPage = 9;
 
   useEffect(() => {
@@ -40,18 +42,12 @@ const HomePage = (props) => {
                     <p className="card-text overflow-hidden">{x.description}</p>
                     <div className="d-flex justify-content-between align-items-center">
                       <div className="btn-group">
-                        <button
-                          type="button"
+                        <Link
+                          to={`/${x.id}`}
                           className="btn btn-sm btn-outline-secondary"
                         >
-                          View
-                        </button>
-                        <button
-                          type="button"
-                          className="btn btn-sm btn-outline-secondary"
-                        >
-                          Edit
-                        </button>
+                        View
+                        </Link>
                       </div>
                       <small className="text-muted">
                         Locations: {x.location}{" "}

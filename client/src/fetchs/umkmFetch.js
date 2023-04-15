@@ -15,4 +15,18 @@ const getUMKMs = async (cb) => {
     }
 }
 
-export {getUMKMs};
+const getUmkmDetail = async (cb, id) => {
+    try {
+        let umkms = await axios({
+            method: 'GET',
+            url: URL + `/detail/${id}`
+        });
+        cb(umkms.data);
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+
+
+export {getUMKMs, getUmkmDetail};

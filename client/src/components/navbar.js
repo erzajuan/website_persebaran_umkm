@@ -42,7 +42,7 @@ const MainNavbar = (props) => {
             >
               My Profile
             </Link>
-            <Link to="#" className="link-font" style={{ textDecoration: "none" }}>
+            <Link to="" className="link-font" style={{ textDecoration: "none" }}>
               My UMKM
             </Link>
           </Nav>
