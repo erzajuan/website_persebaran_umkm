@@ -19,7 +19,6 @@ const Login = (props) => {
 
   function submitHandler(event) {
     event.preventDefault();
-    console.log("Button clicked!");
     login(form, loginCbHandler);
     navigate("/");
   }
