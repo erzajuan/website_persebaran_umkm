@@ -65,7 +65,7 @@ const createUser = async (user) => {
   }
 };
 
-const updateUser = async ( token) => {
+const updateUser = async (data, token) => {
   Swal.fire({
     title: "Are you sure?",
     text: "You won't be able to revert this!",
@@ -81,6 +81,7 @@ const updateUser = async ( token) => {
         let user = await axios({
           method: "PUT",
           url: URL + `/${userData.id}`,
+          data : data
         });
         console.log(user.data);
         Swal.fire("Updated!", "Your data has been updated!", "success");

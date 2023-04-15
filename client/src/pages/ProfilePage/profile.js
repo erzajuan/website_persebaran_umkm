@@ -15,7 +15,7 @@ const Profile = () => {
   }, []);
 
   const submitHandler = () => {
-    updateUser(localStorage.getItem("access_token"));
+    updateUser(user, localStorage.getItem("access_token"));
     navigation(window.location.pathname);
   };
 
