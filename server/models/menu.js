@@ -44,11 +44,6 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
-      hooks: {
-        beforeUpdate: function (menu, options) {
-          menu.image = "https://via.placeholder.com/150";
-        },
-      },
       sequelize,
       modelName: "menu",
     }

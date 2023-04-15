@@ -77,11 +77,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       hooks: {
         beforeCreate: function (umkm, options) {
-          umkm.status = "pending",
-          umkm.image = "https://via.placeholder.com/150"
-        },
-        beforeUpdate: function (umkm, options) {
-          umkm.image = "https://via.placeholder.com/150"
+          umkm.status = "pending"
         },
       },
       sequelize,
