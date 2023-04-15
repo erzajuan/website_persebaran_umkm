@@ -6,7 +6,7 @@ import "./style.css";
 const UmkmPage = () => {
   const [umkm, setUmkm] = useState([]);
   let { umkmId } = useParams();
-
+  //test
   useEffect(() => {
     getUmkmDetail(
       (result) => setUmkm(result),
