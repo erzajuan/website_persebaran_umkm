@@ -23,11 +23,12 @@ class MenuController {
 
   static async create(req, res) {
     try {
-      const access_token = req.headers.access_token;
-      let umkmId = verifToken(access_token).umkm.id;
       const { name, price } = req.body;
-      let { image } = req.body;
-      image == "" ? (image = "https://via.placeholder.com/150") : image;
+      let umkmId = +req.userData.umkm.id;
+      let image = "";
+      typeof req.file == "undefined"
+        ? (image = "https://via.placeholder.com/150")
+        : (image = req.file.path);
       let result = await menu.create({
         name,
         price,
@@ -59,14 +60,27 @@ class MenuController {
 
   static async update(req, res) {
     const id = +req.params.id;
-    const { name, price, image, umkmId } = req.body;
-    try {
-      let result = await menu.update(
-        { name, price, image, umkmId },
-        { where: { id }, individualHooks: true }
-      );
+    const { name, price } = req.body;
 
-      result[0] == 1
+    const checkMenu = await menu.findByPk(id);
+    let image = "";
+    if (checkMenu.image == "https://via.placeholder.com/150") {
+      if (typeof req.file == "undefined") {
+        image = "https://via.placeholder.com/150";
+      } else {
+        image = req.file.path;
+      }
+    } else {
+      if (typeof req.file == "undefined") {
+        image = checkMenu.image;
+      } else {
+        image = req.file.path;
+      }
+    }
+    try {
+      let result = await menu.update({ name, price, image }, { where: { id } });
+
+      result == 1
         ? res
             .status(200)
             .json({ message: `menu dengan id ${id} berhasil diupdate` })
