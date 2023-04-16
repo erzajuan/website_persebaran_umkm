@@ -27,7 +27,7 @@ const Login = (props) => {
     <>
       <div className="text-center login-body bg-success bg-gradient">
         <form className="form-signin bg-light p-4 shadow-lg rounded">
-          <h3 className="h1 mb-3 font-weight-bold">SME Hub</h3>
+          <h3 className="h1 mb-3 logo-font">SME Hub</h3>
           <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
           <div className="form-label-group text-start">
             <input

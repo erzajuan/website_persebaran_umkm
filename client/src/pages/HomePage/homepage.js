@@ -24,14 +24,16 @@ const HomePage = (props) => {
 
   return (
     <>
-      <h1 className="text-center">Homepage</h1>
-      <div className="album py-5 bg-light">
+      <h1 className="text-center text-success">Homepage</h1>
+      <hr />
+      <div className="album py-5">
         <div className="container ">
           <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             {filteredDatas.map((x, i) => (
               <div className="col" key={x.id}>
-                <div className="card shadow-sm">
+                <div className="card shadow-sm rounded">
                   <img
+                    className="rounded"
                     src={x.image}
                     alt={x.name}
                     style={{ width: "100%", height: 225 }}

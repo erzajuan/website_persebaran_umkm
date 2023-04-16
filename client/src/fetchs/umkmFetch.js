@@ -21,7 +21,7 @@ const getUmkmDetail = async (cb, id) => {
             method: 'GET',
             url: URL + `/detail/${id}`
         });
-        cb(umkms.data);
+        cb(umkms.data,umkms.data.menus);
     } catch (e) {
         console.log(e);
     }

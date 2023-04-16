@@ -43,7 +43,6 @@ const getUserDetail = async (cb, token) => {
       method: "GET",
       url: URL + `/detail/${userData.id}`,
     });
-    console.log(userData.umkm);
     cb(user.data);
   } catch (e) {
     console.log(e);

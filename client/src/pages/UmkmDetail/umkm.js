@@ -8,8 +8,7 @@ const UmkmPage = () => {
   const [menu, setMenu] = useState([]);
   let { umkmId } = useParams();
   useEffect(() => {
-    getUmkmDetail((result) => setUmkm(result), umkmId);
-    setMenu(umkm.menus);
+    getUmkmDetail((umkm,menus) => {setUmkm(umkm); setMenu(menus)}, umkmId);
   }, []);
 
   return (
@@ -72,7 +71,7 @@ const UmkmPage = () => {
               </div>
             </>
           ) : (
-            <></>
+            <>No data</>
           )}
         </>
       ) : (

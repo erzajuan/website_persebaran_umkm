@@ -26,7 +26,7 @@ const Register = () => {
   return (
     <div className="text-center login-body bg-success bg-gradient">
       <form className="form-signin bg-light p-4 shadow-lg rounded">
-        <h3 className="h1 mb-3 font-weight-bold">SME Hub</h3>
+        <h3 className="h1 mb-3 logo-font">SME Hub</h3>
         <h1 className="h3 mb-3 font-weight-normal">Sign Up</h1>
         <div class="form-label-group text-start">
           <input

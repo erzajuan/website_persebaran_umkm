@@ -27,7 +27,7 @@ const MainNavbar = (props) => {
     <div>
       <Navbar bg="success gradient" expand="md">
         <Navbar.Toggle onClick={handleToggle} aria-controls="navbar-collapse" />
-        <Link to="/" className="title-font" style={{ textDecoration: "none" }}>
+        <Link to="/" className="title-font logo-font" style={{ textDecoration: "none" }}>
           SME Hub
         </Link>
       </Navbar>
