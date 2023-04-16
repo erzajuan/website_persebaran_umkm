@@ -1,15 +1,20 @@
 import "./style.css";
 import React, { useState, useEffect } from "react";
 import { getUserDetail, updateUser } from "../../fetchs/userFetch";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const Profile = () => {
   const [user, setUser] = useState([]);
+  const [umkm, setUmkm] = useState([]);
   const navigation = useNavigate();
 
   useEffect(() => {
     getUserDetail(
       (result) => setUser(result),
+      localStorage.getItem("access_token")
+    );
+    getUserDetail(
+      (result) => setUmkm(result.umkm.id),
       localStorage.getItem("access_token")
     );
   }, []);
@@ -22,8 +27,9 @@ const Profile = () => {
   return (
     <div className="container m-4">
       <div className="row gutters">
-        <div className="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+        <div className="col-xl-4 col-lg-3 col-md-12 col-sm-12 col-12">
           <div className="card h-100">
+          <div class="card-header text-primary">Profile</div>
             <div className="card-body">
               <div className="account-settings">
                 <div className="user-profile">
@@ -35,19 +41,25 @@ const Profile = () => {
                   </div>
                   <h5 className="user-name">{user.username}</h5>
                   <h6 className="user-email">{user.email}</h6>
+                  <br></br>
+                  <br></br>
+                  <Link to={`/myumkm/${umkm}`} className="btn btn-warning">
+                    My UMKM
+                  </Link>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div className="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
-          <div className="card h-80 " style={{ width: "30rem" }}>
+
+        <div className="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+          <div className="card h-100 " style={{ width: "28rem" }}>
             <div className="card-body">
+            <div class="card-header text-primary">Edit Profile</div>
               <div className="row gutters">
                 <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                  <h6 className="mb-2 text-primary">Edit Profile</h6>
                 </div>
-                <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                <div className="col-xl-10 col-lg-6 col-md-6 col-sm-6 col-12">
                   <div className="form-group">
                     <label htmlFor="fullName">Username</label>
                     <input
@@ -65,7 +77,7 @@ const Profile = () => {
               </div>
 
               <div className="row-gutters">
-                <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                <div className="col-xl-10 col-lg-6 col-md-6 col-sm-6 col-12">
                   <div className="form-group">
                     <label htmlFor="password">Password</label>
                     <input
@@ -82,7 +94,7 @@ const Profile = () => {
               </div>
 
               <div className="row-gutters">
-                <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                <div className="col-xl-10 col-lg-6 col-md-6 col-sm-6 col-12">
                   <div className="form-group">
                     <label htmlFor="eMail">Email</label>
                     <input

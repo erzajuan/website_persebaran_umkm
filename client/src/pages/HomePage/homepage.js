@@ -1,17 +1,30 @@
 import React, { useState, useEffect } from "react";
 import { Pagination } from "react-bootstrap";
-import { getUMKMs } from "../../fetchs/umkmFetch";
-import { Link, useNavigate} from "react-router-dom";
+import { getUserDetail } from "../../fetchs/userFetch";
+import { getUMKMs, getUMKMAdmin, validate } from "../../fetchs/umkmFetch";
+import { Link } from "react-router-dom";
 
 const HomePage = (props) => {
   const [activePage, setActivePage] = useState(1);
   const [umkms, setUmkms] = useState([]);
-  const navigate = useNavigate();
-  const itemsPerPage = 9;
+  const [user, setUser] = useState([]);
+
+  const itemsPerPage = 6;
 
   useEffect(() => {
-    getUMKMs((result) => setUmkms(result));
-  }, []);
+    getUserDetail(
+      (result) => setUser(result),
+      localStorage.getItem("access_token")
+    );
+    user.role == "admin"
+      ? getUMKMAdmin((result) => setUmkms(result))
+      : getUMKMs((result) => setUmkms(result));
+  }, [user.role]);
+
+  const validateHandler = (id) => {
+    console.log("Tombol Ditekan")
+    validate(id);
+  };
 
   // Calculate total number of pages based on number of items per page
   const totalPages = Math.ceil(umkms.length / itemsPerPage);
@@ -28,35 +41,91 @@ const HomePage = (props) => {
       <div className="album py-5 bg-light">
         <div className="container ">
           <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            {filteredDatas.map((x, i) => (
-              <div className="col" key={x.id}>
-                <div className="card shadow-sm">
-                  <img
-                    src={x.image}
-                    alt={x.name}
-                    style={{ width: "100%", height: 225 }}
-                  />
+            {filteredDatas.map((umkm, i) => {
+              if (user.role === "admin") {
+                return (
+                  <div className="col" key={umkm.id}>
+                    <div className="card shadow-sm">
+                      <img
+                        src={umkm.image}
+                        alt={umkm.name}
+                        style={{ width: "100%", height: 225 }}
+                      />
 
-                  <div className="card-body">
-                    <h3 className="card-name"> {x.name}</h3>
-                    <p className="card-text overflow-hidden">{x.description}</p>
-                    <div className="d-flex justify-content-between align-items-center">
-                      <div className="btn-group">
-                        <Link
-                          to={`/${x.id}`}
-                          className="btn btn-sm btn-outline-secondary"
-                        >
-                        View
-                        </Link>
+                      <div className="card-body">
+                        <h3 className="card-name"> {umkm.name}</h3>
+                        <p className="card-text overflow-hidden">
+                          {umkm.description}
+                        </p>
+                        <div className="d-flex justify-content-between align-items-center">
+                          <div className="btn-group">
+                            <Link
+                              to={`/${umkm.id}`}
+                              className="btn btn-sm btn-outline-secondary"
+                            >
+                              View
+                            </Link>
+                            <button
+                              onClick={() => validateHandler(+umkm.id)}
+                              type="button"
+                              className="btn btn-warning"
+                            >
+                              Validate
+                            </button>
+                          </div>
+                          <div class="container text-center">
+                            <div class="row align-items-start">
+                              <div class="col">
+                                <small className="text-muted">
+                                  Locations: {umkm.location}{" "}
+                                </small>
+                              </div>
+                              <div class="col">
+                                <small className="text-muted">
+                                  Status: {umkm.status}{" "}
+                                </small>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                      <small className="text-muted">
-                        Locations: {x.location}{" "}
-                      </small>
                     </div>
                   </div>
-                </div>
-              </div>
-            ))}
+                );
+              } else {
+                return (
+                  <div className="col" key={umkm.id}>
+                    <div className="card shadow-sm">
+                      <img
+                        src={umkm.image}
+                        alt={umkm.name}
+                        style={{ width: "100%", height: 225 }}
+                      />
+
+                      <div className="card-body">
+                        <h3 className="card-name"> {umkm.name}</h3>
+                        <p className="card-text overflow-hidden">
+                          {umkm.description}
+                        </p>
+                        <div className="d-flex justify-content-between align-items-center">
+                          <div className="btn-group">
+                            <Link
+                              to={`/${umkm.id}`}
+                              className="btn btn-sm btn-outline-secondary"
+                            >
+                              View
+                            </Link>
+                          </div>
+                          <small className="text-muted">
+                            Locations: {umkm.location}{" "}
+                          </small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              }
+            })}
           </div>
         </div>
         <div className="mt-3 container d-flex justify-content-center">

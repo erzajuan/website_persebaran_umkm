@@ -16,7 +16,7 @@ class UserController {
   static async detail(req, res) {
     try {
       const id = +req.params.id;
-      let result = await user.findByPk(id);
+      let result = await user.findByPk(id, {include : [umkm]});
       res.status(200).json(result);
     } catch (error) {
       res.status(500).json(error);

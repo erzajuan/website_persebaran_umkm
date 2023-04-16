@@ -1,11 +1,21 @@
 import { Navbar, Nav } from "react-bootstrap";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { getUserDetail } from "../fetchs/userFetch";
+
 import { Link } from "react-router-dom";
 
 const MainNavbar = (props) => {
   const [expanded, setExpanded] = useState(false);
+  const [umkm, setUmkm] = useState([]);
+
   const { loginCbHandler } = props;
 
+  useEffect(() => {
+    getUserDetail(
+      (result) => setUmkm(result.umkm.id),
+      localStorage.getItem("access_token")
+    );
+  });
   const logoutUser = async () => {
     try {
       localStorage.removeItem("access_token");
@@ -42,7 +52,11 @@ const MainNavbar = (props) => {
             >
               My Profile
             </Link>
-            <Link to="" className="link-font" style={{ textDecoration: "none" }}>
+            <Link
+              to={`myumkm/${umkm}`}
+              className="link-font"
+              style={{ textDecoration: "none" }}
+            >
               My UMKM
             </Link>
           </Nav>
