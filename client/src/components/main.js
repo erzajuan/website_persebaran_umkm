@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 
-import { HomePage, Login, Register, Profile, UmkmPage, MyUmkmPage } from "../pages";
+import {
+  HomePage,
+  Login,
+  Register,
+  Profile,
+  UmkmPage,
+  MyUmkmPage,
+} from "../pages";
 import MainNavbar from "./navbar";
 
 const Main = () => {
@@ -30,19 +37,17 @@ const Main = () => {
         <>
           <MainNavbar loginCbHandler={loginCbHandler}></MainNavbar>
           <Routes>
-            <Route
-              path="/"
-              element={
-                <HomePage
-                  loginStatus={loginStatus}
-                  loginCbHandler={loginCbHandler}
-                ></HomePage>
-              }
-            ></Route>
+            <Route path="/" element={<HomePage></HomePage>}></Route>
             <Route path=":umkmId" element={<UmkmPage></UmkmPage>} />
             <Route path="myumkm/:umkmId" element={<MyUmkmPage></MyUmkmPage>} />
-
-            <Route path="profile" element={<Profile></Profile>}></Route>
+            <Route
+              path="profile"
+              element={
+                <Profile
+                  loginCbHandler={loginCbHandler}
+                ></Profile>
+              }
+            ></Route>
           </Routes>
         </>
       ) : (

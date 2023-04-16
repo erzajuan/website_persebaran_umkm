@@ -91,7 +91,7 @@ const updateUser = async ( token, form) => {
   });
 };
 
-const deleteUser = async (id)=>{
+const deleteUser = async (cb,id)=>{
   Swal.fire({
     title: "Are you sure?",
     text: "You won't be able to revert this!",
@@ -107,8 +107,9 @@ const deleteUser = async (id)=>{
           method: "DELETE",
           url: URL + `/${id}`,
         });
-        Swal.fire("Deleted!", "Your account has been deleted!", "success");
         localStorage.removeItem("access_token");
+        cb(false);
+        Swal.fire("Deleted!", "Your account has been deleted!", "success");
       } catch (e) {
         Swal.fire("Failed!", "Delete Error!", "error");
         console.log(e);

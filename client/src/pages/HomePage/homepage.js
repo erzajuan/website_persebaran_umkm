@@ -4,7 +4,7 @@ import { getUserDetail } from "../../fetchs/userFetch";
 import { getUMKMs, getUMKMAdmin, validate } from "../../fetchs/umkmFetch";
 import { Link } from "react-router-dom";
 
-const HomePage = (props) => {
+const HomePage = () => {
   const [activePage, setActivePage] = useState(1);
   const [umkms, setUmkms] = useState([]);
   const [user, setUser] = useState([]);

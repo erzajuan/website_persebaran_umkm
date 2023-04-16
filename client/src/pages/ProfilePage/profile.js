@@ -3,10 +3,11 @@ import React, { useState, useEffect } from "react";
 import { getUserDetail, updateUser, deleteUser } from "../../fetchs/userFetch";
 import { useNavigate, Link } from "react-router-dom";
 
-const Profile = () => {
+const Profile = (props) => {
   const [user, setUser] = useState([]);
   const [umkm, setUmkm] = useState([]);
   const navigation = useNavigate();
+  const { loginCbHandler } = props;
 
   useEffect(() => {
     getUserDetail(
@@ -25,8 +26,7 @@ const Profile = () => {
   };
 
   const deleteHandler = () => {
-    deleteUser(user.id);
-    navigation("/");
+    deleteUser(loginCbHandler,user.id);
   };
 
   return (
