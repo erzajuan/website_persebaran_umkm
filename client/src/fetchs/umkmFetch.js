@@ -51,6 +51,18 @@ const getUmkmDetailMenu = async (cb, id) => {
     }
   };
 
+const updateUmkm = async (id, form) => {
+  try {
+    let umkms = await axios({
+      method: "PUT",
+      url: URL + `/${id}`,
+      data: form,
+    });
+  } catch (e) { 
+    console.log(e);
+  }
+}
+
 const validate = async (id) => {
   try {
     console.log(id)
@@ -67,4 +79,4 @@ const validate = async (id) => {
   }
 };
 
-export { getUMKMs, getUmkmDetail, getUMKMAdmin, validate, getUmkmDetailMenu};
+export { getUMKMs, getUmkmDetail, getUMKMAdmin, validate, getUmkmDetailMenu, updateUmkm};

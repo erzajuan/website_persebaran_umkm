@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const MainNavbar = (props) => {
   const [expanded, setExpanded] = useState(false);
-  const [umkm, setUmkm] = useState([]);
+  const [umkm, setUmkm] = useState(["null"]);
 
   const { loginCbHandler } = props;
 

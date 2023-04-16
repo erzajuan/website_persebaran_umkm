@@ -34,7 +34,7 @@ const Profile = (props) => {
       <div className="row gutters">
         <div className="col-xl-4 col-lg-3 col-md-12 col-sm-12 col-12">
           <div className="card h-100">
-          <div class="card-header text-primary">Profile</div>
+          <div className="card-header text-primary">Profile</div>
             <div className="card-body">
               <div className="account-settings">
                 <div className="user-profile">
@@ -59,8 +59,9 @@ const Profile = (props) => {
 
         <div className="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
           <div className="card h-100 " style={{ width: "28rem" }}>
+          <div class="card-header text-primary">Edit Profile</div>
+
             <div className="card-body">
-            <div class="card-header text-primary">Edit Profile</div>
               <div className="row gutters">
                 <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 </div>

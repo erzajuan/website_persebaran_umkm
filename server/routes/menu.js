@@ -5,8 +5,8 @@ const upload = require("../services/multer");
 
 menuRoute.get("/", MenuController.getMenu);
 menuRoute.get("/:id", MenuController.detail);
-menuRoute.post("/", checkToken, upload.single("image"), MenuController.create);
+menuRoute.post("/", checkToken, upload, MenuController.create);
 menuRoute.delete("/:id", MenuController.delete);
-menuRoute.put("/:id", upload.single("image"), MenuController.update);
+menuRoute.put("/:id", upload, MenuController.update);
 
 module.exports = menuRoute;

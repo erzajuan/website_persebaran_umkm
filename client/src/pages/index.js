@@ -4,5 +4,16 @@ import HomePage from "./HomePage/homepage";
 import Profile from "./ProfilePage/profile";
 import UmkmPage from "./UmkmDetail/umkm";
 import MyUmkmPage from "./ProfilePage/myUmkm";
+import EditUmkm from "./AddEditUmkm/EditPage";
+import AddUmkm from "./AddEditUmkm/AddPage";
 
-export { HomePage, Login, Register, Profile, UmkmPage, MyUmkmPage };
+export {
+  HomePage,
+  Login,
+  Register,
+  Profile,
+  UmkmPage,
+  MyUmkmPage,
+  EditUmkm,
+  AddUmkm,
+};

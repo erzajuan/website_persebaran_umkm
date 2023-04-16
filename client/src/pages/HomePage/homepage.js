@@ -22,7 +22,6 @@ const HomePage = () => {
   }, [user.role]);
 
   const validateHandler = (id) => {
-    console.log("Tombol Ditekan")
     validate(id);
   };
 

@@ -12,35 +12,44 @@ const UmkmPage = () => {
   }, []);
 
   return (
-    <div className="container m-4 d-flex flex-column ">
+    <div className=" p-4 d-flex flex-column ">
       {umkm ? (
         <>
-          <div className="container container-contact ">
-            <div className="row decor-default">
+          <div className="m-4">
+            <div className="row">
               <div className="col-md-12">
                 <div className="contact">
-                  <div className="text-center">
-                    <img src={umkm.image} alt="cover" className="cover" />
-                  </div>
-
+                <div className="col-md-6">
+                <div className="pro-img-details">
+                  <img
+                    className="cover"
+                    src={umkm.image}
+                    alt="cover"
+                    style={{ width: 500, height: 500 }}
+                  ></img>
+                </div>
+              </div>
                   <div className="row">
-                    <div className="col-md-4 col-md-5 col-xs-12">
-                      <div className="row">
-                        <div className="col-xs-3">Nama umkm:</div>
-                        <div className="col-xs-9">{umkm.name}</div>
-                        <div className="col-xs-3">Alamat:</div>
-                        <div className="col-xs-9">{umkm.location}</div>
-                        <div className="col-xs-3">Open Days</div>
-                        <div className="col-xs-9">{umkm.openDays}</div>
-                        <div className="col-xs-3">Open Time:</div>
-                        <div className="col-xs-9">{umkm.openTime}</div>
-                        <div className="col-xs-3">Map:</div>
-                        <div className="col-xs-9">{umkm["map"]}</div>
-                      </div>
-                    </div>
-                    <div className="col-md-4 col-md-7 col-xs-12">
-                      <p className="contact-description">{umkm.description}</p>
-                    </div>
+                  <h4 className="pro-d-title">{umkm.name}</h4>
+                <p>{umkm.description}</p>
+
+                {/* OPEN TIME */}
+                <div className="product_meta">
+                  <span className="posted_in">
+                    <strong>Open Time:</strong> {umkm.openTime}, {umkm.openDays}
+                  </span>
+                </div>
+
+                {/* LOCATION */}
+                <div className="product_meta">
+                  <span className="posted_in">
+                    {" "}
+                    <strong>Location:</strong> {umkm.location}{" "}
+                    <a href={umkm.map} target="_blank">
+                      Show on Google Map
+                    </a>
+                  </span>
+                </div>
                   </div>
                 </div>
               </div>
@@ -48,7 +57,7 @@ const UmkmPage = () => {
           </div>
           {menu ? (
             <>
-              <div class="container decor-default">
+              <div class="container">
                 <h1 class="text-center text-muted">Menu</h1>
                 <div class="row flow-offset-1">
                   {menu.map((x) => (
