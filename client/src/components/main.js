@@ -41,7 +41,6 @@ const Main = () => {
             ></Route>
             <Route path=":umkmId" element={<UmkmPage></UmkmPage>} />
             <Route path="myumkm/:umkmId" element={<MyUmkmPage></MyUmkmPage>} />
-
             <Route path="profile" element={<Profile></Profile>}></Route>
           </Routes>
         </>

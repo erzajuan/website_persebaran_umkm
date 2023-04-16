@@ -12,7 +12,7 @@ const UmkmPage = () => {
       (result) => setUmkm(result),
       umkmId
     );
-  }, []);
+  }, [umkmId]);
 
   return (
     <>
