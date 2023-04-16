@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { getUmkmDetail } from "../../fetchs/umkmFetch";
-import { useNavigate, useParams } from "react-router-dom";
+import { getUmkmDetailMenu } from "../../fetchs/umkmFetch";
+import { useParams } from "react-router-dom";
 import "./style.css";
 
 const UmkmPage = () => {
@@ -8,7 +8,7 @@ const UmkmPage = () => {
   const [menu, setMenu] = useState([]);
   let { umkmId } = useParams();
   useEffect(() => {
-    getUmkmDetail((umkm,menus) => {setUmkm(umkm); setMenu(menus)}, umkmId);
+    getUmkmDetailMenu((umkm,menus) => {setUmkm(umkm); setMenu(menus)}, umkmId);
   }, []);
 
   return (

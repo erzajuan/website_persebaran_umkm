@@ -91,6 +91,32 @@ const updateUser = async ( token, form) => {
   });
 };
 
+const deleteUser = async (id)=>{
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, delete it!",
+  }).then(async (result) => {
+    if (result.isConfirmed) {
+      try {
+        let user = await axios({
+          method: "DELETE",
+          url: URL + `/${id}`,
+        });
+        Swal.fire("Deleted!", "Your account has been deleted!", "success");
+        localStorage.removeItem("access_token");
+      } catch (e) {
+        Swal.fire("Failed!", "Delete Error!", "error");
+        console.log(e);
+      }
+    }
+  });
+}
+
 const parseJwt = (token) => {
   var base64Url = token.split(".")[1];
   var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
@@ -107,4 +133,4 @@ const parseJwt = (token) => {
   return JSON.parse(jsonPayload);
 };
 
-export { login, getUsers, createUser, getUserDetail, updateUser, };
+export { login, getUsers, createUser, getUserDetail, updateUser, deleteUser };
