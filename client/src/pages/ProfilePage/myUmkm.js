@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { getUmkmDetail } from "../../fetchs/umkmFetch";
+import { deleteMenu } from "../../fetchs/menuFetch";
 import { useParams, Link, useNavigate } from "react-router-dom";
 
 const MyUmkmPage = () => {
   const [umkm, setUmkm] = useState([]);
-  const [menus, setMenus] = useState([]);
-  const [bool,setBool] = useState(false);
+  const [menu, setMenus] = useState([]);
+  const [bool, setBool] = useState(false);
   const navigate = useNavigate();
-
-  const editHandler = () => {
-    navigate("edit");
-  };
 
   let { umkmId } = useParams();
   useEffect(() => {
@@ -19,9 +16,13 @@ const MyUmkmPage = () => {
     getUmkmDetail((result) => setMenus(result.menus), umkmId);
   }, [umkmId]);
 
+  const deleteHandler = (id) => {
+    deleteMenu(id, navigate )
+  };
+
   return (
     <>
-      {bool? (
+      {bool ? (
         <div className="container p-4">
           <div className="col-md-12">
             <Link to={"editumkm"} className="btn btn-primary my-3">
@@ -56,27 +57,31 @@ const MyUmkmPage = () => {
                     <span className="posted_in">
                       {" "}
                       <strong>Location:</strong> {umkm.location}{" "}
-                      <a href={umkm.map} target="_blank">
+                      <Link href={umkm.map} target="_blank" rel="noreferrer">
                         Show on Google Map
-                      </a>
+                      </Link>
                     </span>
                   </div>
-                  <div class="col-lg-12 col-md-12 col-sm-12">
-                    <h3 class="box-title mt-3">Menu</h3>
-                    <Link to={`addmenu`} className="btn btn-primary my-2"> + </Link>
-                    <div class="table-responsive">
-                      <table class="table table-striped table-product">
+                  <div className="col-lg-12 col-md-12 col-sm-12">
+                    <h3 className="box-title mt-3">Menu</h3>
+                    <Link to={`addmenu`} className="btn btn-primary my-2">
+                      {" "}
+                      +{" "}
+                    </Link>
+                    <div className="table-responsive">
+                      <table className="table table-striped table-product">
                         <tbody>
                           {/* MENU */}
-                          {menus.length > 0 ? (
-                            menus.map((item) => {
-                              const {id, name, price, image } = item;
+                          {menu.length > 0 ? (
+                            menu.map((item) => {
+                              const { id, name, price, image } = item;
                               return (
                                 <tr>
                                   <td width="390">
                                     <img
                                       className="img-thumbnail img-fluid"
                                       src={image}
+                                      style={{ width: 200, height: 200 }}
                                       alt="cover"
                                     ></img>
                                   </td>
@@ -96,7 +101,7 @@ const MyUmkmPage = () => {
                                       </Link>
                                       <br></br>
                                       <button
-                                        // onClick={() => deleteHandler(+id)}
+                                        onClick={() => deleteHandler(+id)}
                                         type="button"
                                         className="btn btn-danger"
                                       >
@@ -122,8 +127,8 @@ const MyUmkmPage = () => {
       ) : (
         <div>
           <Link to={"/myumkm/addumkm"} className="btn btn-primary my-3">
-              Add Umkm
-            </Link>
+            Add Umkm
+          </Link>
         </div>
       )}
     </>

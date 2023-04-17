@@ -70,7 +70,7 @@ const Profile = (props) => {
 
         <div className="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
           <div className="card h-100 " style={{ width: "28rem" }}>
-          <div class="card-header text-primary">Edit Profile</div>
+          <div className="card-header text-primary">Edit Profile</div>
 
             <div className="card-body">
               <div className="row gutters">

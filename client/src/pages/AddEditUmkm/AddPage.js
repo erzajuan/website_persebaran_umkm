@@ -4,7 +4,6 @@ import { addUmkm } from "../../fetchs/umkmFetch";
 import { useNavigate } from "react-router-dom";
 
 const AddUmkm = () => {
-
   const [umkm, setUmkm] = useState({
     name: "",
     location: "",
@@ -19,7 +18,7 @@ const AddUmkm = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    setUmkm({ ...umkm, userId: localStorage.getItem("userId")});
+    setUmkm({ ...umkm, userId: localStorage.getItem("userId") });
   }, []);
 
   const submitHandler = (event) => {

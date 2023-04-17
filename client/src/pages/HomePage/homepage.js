@@ -14,7 +14,7 @@ const HomePage = () => {
     role: "",
   });
 
-  const itemsPerPage = 6;
+  const itemsPerPage = 3;
 
   useEffect(() => {
     getUserDetail(
@@ -85,14 +85,14 @@ const HomePage = () => {
                               Validate
                             </button>
                           </div>
-                          <div class="container text-center">
-                            <div class="row align-items-start">
-                              <div class="col">
+                          <div className="container text-center">
+                            <div className="row align-items-start">
+                              <div className="col">
                                 <small className="text-muted">
                                   Locations: {umkm.location}{" "}
                                 </small>
                               </div>
-                              <div class="col">
+                              <div className="col">
                                 <small className="text-muted">
                                   Status: {umkm.status}{" "}
                                 </small>

@@ -57,7 +57,10 @@ const addUmkm = async (form, navigate) => {
       method: "POST",
       url: URL,
       data: form,
-      headers: { "Content-Type": "multipart/form-data", "access_token": localStorage.getItem("access_token") },
+      headers: {
+        "Content-Type": "multipart/form-data",
+        access_token: localStorage.getItem("access_token"),
+      },
     });
     Swal.fire("Created!", "Your umkm has been created!", "success");
     navigate("/");
