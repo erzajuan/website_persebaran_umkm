@@ -17,10 +17,16 @@ let upload = (req, res, next) => {
     if (err) {
       return next(err);
     }
-    let image =
-      req.protocol + "://" + req.get("host") + "/assets/" + req.file.filename;
-    req.file.path = image;
-    next()
+    let image = "";
+
+    if (typeof req.file == "undefined") {
+      next();
+    } else {
+      image =
+        req.protocol + "://" + req.get("host") + "/assets/" + req.file.filename;
+      req.file.path = image;
+      next();
+    }
   });
 };
 
