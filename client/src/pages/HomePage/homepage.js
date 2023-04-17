@@ -7,13 +7,25 @@ import { Link } from "react-router-dom";
 const HomePage = () => {
   const [activePage, setActivePage] = useState(1);
   const [umkms, setUmkms] = useState([]);
-  const [user, setUser] = useState([]);
+  const [user, setUser] = useState({
+    username: "",
+    password: "",
+    email: "",
+    role: "",
+  });
 
   const itemsPerPage = 6;
 
   useEffect(() => {
     getUserDetail(
-      (result) => setUser(result),
+      (result) =>
+        setUser({
+          id: result.id,
+          username: result.username,
+          password: result.password,
+          email: result.email,
+          role: result.role,
+        }),
       localStorage.getItem("access_token")
     );
     user.role == "admin"

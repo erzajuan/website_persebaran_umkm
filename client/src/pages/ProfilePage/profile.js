@@ -4,14 +4,24 @@ import { getUserDetail, updateUser, deleteUser } from "../../fetchs/userFetch";
 import { useNavigate, Link } from "react-router-dom";
 
 const Profile = (props) => {
-  const [user, setUser] = useState([]);
+  const [user, setUser] = useState({
+    username: "",
+    password: "",
+    email: ""
+  });
   const [umkm, setUmkm] = useState([]);
   const navigation = useNavigate();
   const { loginCbHandler } = props;
 
   useEffect(() => {
     getUserDetail(
-      (result) => setUser(result),
+      (result) => setUser({
+        id: result.id,
+        username: result.username,
+        password: "",
+        email: result.email,
+        role: result.role
+      }),
       localStorage.getItem("access_token")
     );
     getUserDetail(
@@ -46,6 +56,7 @@ const Profile = (props) => {
                   </div>
                   <h5 className="user-name">{user.username}</h5>
                   <h6 className="user-email">{user.email}</h6>
+                  <h6 className="user-email">{user.role}</h6>
                   <br></br>
                   <br></br>
                   <Link to={`/myumkm/${umkm}`} className="btn btn-warning">
@@ -87,10 +98,11 @@ const Profile = (props) => {
                   <div className="form-group">
                     <label htmlFor="password">Password</label>
                     <input
-                      type="email"
+                      type="password"
                       className="form-control"
-                      id="eMail"
+                      id="password"
                       placeholder="Enter New Password"
+                      defaultValue=""
                       onChange={(e) =>
                         setUser({ ...user, password: e.target.value })
                       }
