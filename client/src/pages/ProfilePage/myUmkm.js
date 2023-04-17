@@ -63,14 +63,14 @@ const MyUmkmPage = () => {
                   </div>
                   <div class="col-lg-12 col-md-12 col-sm-12">
                     <h3 class="box-title mt-3">Menu</h3>
-                    <button className="btn btn-primary my-2"> + </button>
+                    <Link to={`addmenu`} className="btn btn-primary my-2"> + </Link>
                     <div class="table-responsive">
                       <table class="table table-striped table-product">
                         <tbody>
                           {/* MENU */}
                           {menus.length > 0 ? (
                             menus.map((item) => {
-                              const { name, price, image } = item;
+                              const {id, name, price, image } = item;
                               return (
                                 <tr>
                                   <td width="390">
@@ -89,7 +89,7 @@ const MyUmkmPage = () => {
                                   <td>
                                     <div className="d-grid gap-2 col-12 mx-12">
                                       <Link
-                                        to={`}`}
+                                        to={`editmenu/${id}`}
                                         className="btn btn-warning"
                                       >
                                         Edit
@@ -121,7 +121,7 @@ const MyUmkmPage = () => {
         </div>
       ) : (
         <div>
-          <Link to={"addumkm"} className="btn btn-primary my-3">
+          <Link to={"/myumkm/addumkm"} className="btn btn-primary my-3">
               Add Umkm
             </Link>
         </div>

@@ -1,13 +1,30 @@
 import React, { useState, useEffect } from "react";
 import "./style.css";
-// import { addUmkm } from "../../fetchs/umkmFetch";
+import { addUmkm } from "../../fetchs/umkmFetch";
+import { useNavigate } from "react-router-dom";
 
-const AddUmkm= () => {
-  const [umkm, setUmkm] = useState([]);
+const AddUmkm = () => {
 
-  const submitHandler = () => {
-    // addUmkm(umkm);
-    // navigation("/");
+  const [umkm, setUmkm] = useState({
+    name: "",
+    location: "",
+    description: "",
+    openDays: "",
+    openTime: "",
+    map: "",
+    image: "",
+    userId: 0,
+  });
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    setUmkm({ ...umkm, userId: localStorage.getItem("userId")});
+  }, []);
+
+  const submitHandler = (event) => {
+    event.preventDefault();
+    addUmkm(umkm, navigate);
   };
 
   return (
@@ -26,7 +43,6 @@ const AddUmkm= () => {
                     name="name"
                     type="text"
                     className="form-control"
-                    value={umkm.name}
                     onChange={(e) => setUmkm({ ...umkm, name: e.target.value })}
                   />
                 </div>
@@ -37,7 +53,6 @@ const AddUmkm= () => {
                     name="location"
                     type="text"
                     className="form-control"
-                    value={umkm.location}
                     onChange={(e) =>
                       setUmkm({ ...umkm, location: e.target.value })
                     }
@@ -52,7 +67,6 @@ const AddUmkm= () => {
                     className="form-control"
                     id="umkmdesc"
                     rows="5"
-                    value={umkm.description}
                     onChange={(e) =>
                       setUmkm({ ...umkm, description: e.target.value })
                     }
@@ -70,7 +84,6 @@ const AddUmkm= () => {
                     name="opendays"
                     type="text"
                     className="form-control"
-                    value={umkm.openDays}
                     onChange={(e) =>
                       setUmkm({ ...umkm, openDays: e.target.value })
                     }
@@ -83,7 +96,6 @@ const AddUmkm= () => {
                     name="opentime"
                     type="text"
                     className="form-control"
-                    value={umkm.openTime}
                     onChange={(e) =>
                       setUmkm({ ...umkm, openTime: e.target.value })
                     }
@@ -97,7 +109,6 @@ const AddUmkm= () => {
                     name="map"
                     type="text"
                     className="form-control"
-                    value={umkm.map}
                     onChange={(e) => setUmkm({ ...umkm, map: e.target.value })}
                   />
                 </div>
@@ -132,7 +143,7 @@ const AddUmkm= () => {
             <button
               type="submit"
               className="btn btn-success mr-1 "
-            //   onClick={editHandler}
+              onClick={submitHandler}
             >
               Save Changes
             </button>

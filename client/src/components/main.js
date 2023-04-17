@@ -10,6 +10,8 @@ import {
   MyUmkmPage,
   EditUmkm,
   AddUmkm,
+  AddMenu,
+  EditMenu,
 } from "../pages";
 import MainNavbar from "./navbar";
 
@@ -45,11 +47,12 @@ const Main = () => {
               element={<Profile loginCbHandler={loginCbHandler}></Profile>}
             ></Route>
             <Route path=":umkmId" element={<UmkmPage></UmkmPage>} />
-
             <Route path="myumkm/:umkmId/" element={<MyUmkmPage></MyUmkmPage>} />
             <Route path="myumkm/:umkmId/editumkm" element={<EditUmkm></EditUmkm>} />
-            <Route path="myumkm/:umkmId/addumkm" element={<AddUmkm></AddUmkm>} />
-            <Route path="profile" element={<Profile></Profile>}></Route>
+            <Route path="myumkm/addumkm" element={<AddUmkm></AddUmkm>} />
+            <Route path="myumkm/:umkmId/addmenu" element={<AddMenu></AddMenu>} />
+            <Route path="myumkm/:umkmId/editmenu/:menuId" element={<EditMenu></EditMenu>} />
+            <Route path="myumkm/:umkmId/editmenu" element={<EditMenu></EditMenu>} />
           </Routes>
         </>
       ) : (

@@ -6,6 +6,8 @@ import UmkmPage from "./UmkmDetail/umkm";
 import MyUmkmPage from "./ProfilePage/myUmkm";
 import EditUmkm from "./AddEditUmkm/EditPage";
 import AddUmkm from "./AddEditUmkm/AddPage";
+import AddMenu from "./AddEditMenus/AddMenuPage";
+import EditMenu from "./AddEditMenus/EditMenuPage";
 
 export {
   HomePage,
@@ -16,4 +18,6 @@ export {
   MyUmkmPage,
   EditUmkm,
   AddUmkm,
+  AddMenu,
+  EditMenu,
 };

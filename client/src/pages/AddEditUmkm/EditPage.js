@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "./style.css";
 import { getUmkmDetail, updateUmkm } from "../../fetchs/umkmFetch";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 const EditUmkm = () => {
   const [umkm, setUmkm] = useState([]);
 
   let { umkmId } = useParams();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     getUmkmDetail((result) => setUmkm(result), umkmId);
@@ -14,8 +16,7 @@ const EditUmkm = () => {
 
   const editHandler = (event) => {
     event.preventDefault();
-    // console.log(umkm);
-    updateUmkm(umkmId, umkm);
+    updateUmkm(umkmId, umkm, navigate);
   };
 
   return (
@@ -139,7 +140,7 @@ const EditUmkm = () => {
 
             <button
               type="submit"
-              className="btn btn-success mr-1 "
+              className="btn btn-success mr-1 mt-1 "
               onClick={editHandler}
             >
               Save Changes

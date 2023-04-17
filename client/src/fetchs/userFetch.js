@@ -13,6 +13,7 @@ const login = async (form, loginHandler) => {
     const access_token = result.data.access_token;
     const token_data = parseJwt(access_token);
     localStorage.setItem("access_token", access_token);
+    localStorage.setItem("userId", token_data.id);
     loginHandler(true);
   } catch (e) {
     Swal.fire({
@@ -108,6 +109,7 @@ const deleteUser = async (cb,id)=>{
           url: URL + `/${id}`,
         });
         localStorage.removeItem("access_token");
+        localStorage.removeItem("userId");
         cb(false);
         Swal.fire("Deleted!", "Your account has been deleted!", "success");
       } catch (e) {

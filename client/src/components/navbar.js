@@ -19,6 +19,7 @@ const MainNavbar = (props) => {
   const logoutUser = async () => {
     try {
       localStorage.removeItem("access_token");
+      localStorage.removeItem("userId");
       loginCbHandler(false);
     } catch (err) {
       console.log(err);

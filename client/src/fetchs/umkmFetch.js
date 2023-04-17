@@ -40,32 +40,64 @@ const getUmkmDetail = async (cb, id) => {
 };
 
 const getUmkmDetailMenu = async (cb, id) => {
-    try {
-      let umkms = await axios({
-        method: "GET",
-        url: URL + `/detail/${id}`,
-      });
-      cb(umkms.data, umkms.data.menus);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-const updateUmkm = async (id, form) => {
   try {
     let umkms = await axios({
-      method: "PUT",
-      url: URL + `/${id}`,
-      data: form,
+      method: "GET",
+      url: URL + `/detail/${id}`,
     });
-  } catch (e) { 
+    cb(umkms.data, umkms.data.menus);
+  } catch (e) {
     console.log(e);
   }
-}
+};
+
+const addUmkm = async (form, navigate) => {
+  try {
+    let umkms = await axios({
+      method: "POST",
+      url: URL,
+      data: form,
+      headers: { "Content-Type": "multipart/form-data", "access_token": localStorage.getItem("access_token") },
+    });
+    Swal.fire("Created!", "Your umkm has been created!", "success");
+    navigate("/");
+  } catch (e) {
+    Swal.fire("Failed!", "Create Error!", "error");
+    console.log(e);
+  }
+};
+
+const updateUmkm = async (id, form, navigate) => {
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, save it!",
+  }).then(async (result) => {
+    if (result.isConfirmed) {
+      try {
+        let umkms = await axios({
+          method: "PUT",
+          url: URL + `/${id}`,
+          data: form,
+          headers: { "Content-Type": "multipart/form-data" },
+        });
+        Swal.fire("Updated!", "Your umkm has been updated!", "success");
+        navigate("/");
+      } catch (e) {
+        Swal.fire("Failed!", "Update Error!", "error");
+        console.log(e);
+      }
+    }
+  });
+};
 
 const validate = async (id) => {
   try {
-    console.log(id)
+    console.log(id);
     let result = await axios({
       method: "PUT",
       url: URL + "/validate/" + id,
@@ -73,10 +105,18 @@ const validate = async (id) => {
 
     Swal.fire("UMKM" + id, "UMKM Has Been Validates", "success");
 
-    console.log(result)
+    console.log(result);
   } catch (e) {
     console.log(e);
   }
 };
 
-export { getUMKMs, getUmkmDetail, getUMKMAdmin, validate, getUmkmDetailMenu, updateUmkm};
+export {
+  getUMKMs,
+  getUmkmDetail,
+  getUMKMAdmin,
+  validate,
+  getUmkmDetailMenu,
+  updateUmkm,
+  addUmkm,
+};
