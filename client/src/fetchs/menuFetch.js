@@ -65,7 +65,7 @@ const updateMenu = async (id, form, navigate, umkmId) => {
 const deleteMenu = async (id, navigate) => {
   Swal.fire({
     title: "Are you sure?",
-    text: id,
+    text: "You won't be able to revert this!",
     icon: "warning",
     showCancelButton: true,
     confirmButtonColor: "#3085d6",

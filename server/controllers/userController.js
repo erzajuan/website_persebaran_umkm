@@ -1,4 +1,4 @@
-const { user, umkm } = require("../models");
+const { user, umkm, menu } = require("../models");
 const { decrypt } = require("../helpers/bcrypt");
 const { generateToken, verifToken } = require("../helpers/auth");
 class UserController {
@@ -16,7 +16,7 @@ class UserController {
   static async detail(req, res) {
     try {
       const id = +req.params.id;
-      let result = await user.findByPk(id, {include : [umkm]});
+      let result = await user.findByPk(id, { include: [umkm] });
       res.status(200).json(result);
     } catch (error) {
       res.status(500).json(error);
@@ -66,6 +66,16 @@ class UserController {
       let result = await user.destroy({
         where: { id },
       });
+      let dataUmkm = await umkm.findOne({where : {userId: id}})
+
+      let resultUmkm = await umkm.destroy({
+        where: { userId: id },
+      });
+
+      let resultMenu = await menu.destroy({
+        where: { umkmId: dataUmkm.id },
+      });
+
 
       result == 1
         ? res
