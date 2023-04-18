@@ -2,10 +2,20 @@ import React, { useState, useEffect } from "react";
 import { getUmkmDetail } from "../../fetchs/umkmFetch";
 import { deleteMenu } from "../../fetchs/menuFetch";
 import { useParams, Link, useNavigate } from "react-router-dom";
+import {
+  MdLibraryAdd,
+  MdEditDocument,
+  MdModeEditOutline,
+  MdOutlineDeleteForever,
+} from "react-icons/md";
+import ReactLoading from "react-loading";
 
 const MyUmkmPage = () => {
   const [umkm, setUmkm] = useState([]);
+
+  const [done, setDone] = useState(undefined);
   const [menu, setMenus] = useState([]);
+
   const [bool, setBool] = useState(false);
   const navigate = useNavigate();
 
@@ -13,11 +23,17 @@ const MyUmkmPage = () => {
   useEffect(() => {
     umkmId == "null" ? setBool(false) : setBool(true);
     getUmkmDetail((result) => setUmkm(result), umkmId);
-    getUmkmDetail((result) => setMenus(result.menus), umkmId);
+
+    setTimeout(() => {
+      getUmkmDetail((result) => {
+        setMenus(result.menus);
+        setDone(true);
+      }, umkmId);
+    }, 2000);
   }, [umkmId]);
 
   const deleteHandler = (id) => {
-    deleteMenu(id, navigate )
+    deleteMenu(id, navigate);
   };
 
   return (
@@ -26,7 +42,7 @@ const MyUmkmPage = () => {
         <div className="container p-4">
           <div className="col-md-12">
             <Link to={"editumkm"} className="btn btn-primary my-3">
-              Edit
+              <MdEditDocument />
             </Link>
             <section className="panel">
               <div className="panel-body">
@@ -66,13 +82,20 @@ const MyUmkmPage = () => {
                     <h3 className="box-title mt-3">Menu</h3>
                     <Link to={`addmenu`} className="btn btn-primary my-2">
                       {" "}
-                      +{" "}
+                      <MdLibraryAdd />{" "}
                     </Link>
                     <div className="table-responsive">
                       <table className="table table-striped table-product">
                         <tbody>
                           {/* MENU */}
-                          {menu.length > 0 ? (
+                          {!done ? (
+                            <ReactLoading
+                              type={"spin"}
+                              color={"#4caf50"}
+                              height={100}
+                              width={100}
+                            />
+                          ) : (
                             menu.map((item) => {
                               const { id, name, price, image } = item;
                               return (
@@ -97,7 +120,7 @@ const MyUmkmPage = () => {
                                         to={`editmenu/${id}`}
                                         className="btn btn-warning"
                                       >
-                                        Edit
+                                        <MdModeEditOutline />
                                       </Link>
                                       <br></br>
                                       <button
@@ -105,15 +128,13 @@ const MyUmkmPage = () => {
                                         type="button"
                                         className="btn btn-danger"
                                       >
-                                        Delete
+                                        <MdOutlineDeleteForever />
                                       </button>
                                     </div>
                                   </td>
                                 </tr>
                               );
                             })
-                          ) : (
-                            <></>
                           )}
                         </tbody>
                       </table>
@@ -125,10 +146,13 @@ const MyUmkmPage = () => {
           </div>
         </div>
       ) : (
-        <div>
-          <Link to={"/myumkm/addumkm"} className="btn btn-primary my-3">
+        <div className=" loading-body text-center ">
+          <div className="">
+          <Link to={"/myumkm/addumkm"} className="btn btn-success my-3 ">
             Add Umkm
           </Link>
+          </div>
+          
         </div>
       )}
     </>

@@ -76,14 +76,17 @@ const updateUser = async ( token, form) => {
   }).then(async (result) => {
     if (result.isConfirmed) {
       try {
-        const userData = parseJwt(token);
+        if (form.password === "") {
+          Swal.fire("Failed!", "You need to enter old password or enter new password!", "error");
+        } else {
+          const userData = parseJwt(token);
         let user = await axios({
           method: "PUT",
           url: URL + `/${userData.id}`,
           data: form
         });
-        console.log(user.data);
         Swal.fire("Updated!", "Your data has been updated!", "success");
+        }       
       } catch (e) {
         Swal.fire("Failed!", "Update Error!", "error");
         console.log(e);

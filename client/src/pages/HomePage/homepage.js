@@ -57,10 +57,11 @@ const HomePage = () => {
               if (user.role === "admin") {
                 return (
                   <div className="col" key={umkm.id}>
-                    <div className="card shadow-sm rounded">
+                    <div className="card shadow rounded">
                       <img
                         src={umkm.image}
                         alt={umkm.name}
+                        className="rounded shadow-sm"
                         style={{ width: "100%", height: 225 }}
                       />
 
