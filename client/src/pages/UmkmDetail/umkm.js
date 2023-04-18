@@ -2,21 +2,41 @@ import React, { useState, useEffect } from "react";
 import { getUmkmDetailMenu } from "../../fetchs/umkmFetch";
 import { useParams } from "react-router-dom";
 import "./style.css";
+import ReactLoading from "react-loading";
 
 const UmkmPage = () => {
   const [umkm, setUmkm] = useState([]);
   const [menu, setMenu] = useState([]);
+  const [doneUmkm, setDoneUmkm] = useState(undefined);
+  const [doneMenu, setDoneMenu] = useState(undefined);
   let { umkmId } = useParams();
   useEffect(() => {
     getUmkmDetailMenu((umkm, menus) => {
-      setUmkm(umkm);
-      setMenu(menus);
+      setTimeout(() => {
+        setUmkm(umkm);
+        setDoneUmkm(true);
+      }, 2000);
+
+      setTimeout(() => {
+        setMenu(menus);
+        setDoneMenu(true);
+      }, 2000);
     }, umkmId);
   }, []);
 
   return (
     <div className=" p-4 d-flex flex-column ">
-      {umkm ? (
+      {!doneUmkm ? (
+        <div className="loading-body">
+        <ReactLoading
+          type={"spin"}
+          color={"#4caf50"}
+          height={100}
+          width={100}
+          className="align-items-center justify-content-center"
+        />
+        </div>
+      ) : (
         <>
           <div className="m-4">
             <div className="row">
@@ -59,7 +79,14 @@ const UmkmPage = () => {
               </div>
             </div>
           </div>
-          {menu ? (
+          {!doneMenu ? (
+            <ReactLoading
+              type={"spin"}
+              color={"#4caf50"}
+              height={100}
+              width={100}
+            />
+          ) : (
             <>
               <div class="container">
                 <h2 class="box-title mt-3 text-center">Menu</h2>
@@ -88,12 +115,8 @@ const UmkmPage = () => {
                 </div>
               </div>
             </>
-          ) : (
-            <>No data</>
           )}
         </>
-      ) : (
-        <h3>No Data</h3>
       )}
     </div>
   );

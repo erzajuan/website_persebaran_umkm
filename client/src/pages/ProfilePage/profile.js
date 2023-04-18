@@ -2,26 +2,29 @@ import "./style.css";
 import React, { useState, useEffect } from "react";
 import { getUserDetail, updateUser, deleteUser } from "../../fetchs/userFetch";
 import { useNavigate, Link } from "react-router-dom";
+import { MdSave, MdOutlineDeleteForever } from "react-icons/md";
 
 const Profile = (props) => {
   const [user, setUser] = useState({
     username: "",
     password: "",
-    email: ""
+    email: "",
   });
   const [umkm, setUmkm] = useState([]);
+  const [disabled, setDisabled] = useState(true);
   const navigation = useNavigate();
   const { loginCbHandler } = props;
 
   useEffect(() => {
     getUserDetail(
-      (result) => setUser({
-        id: result.id,
-        username: result.username,
-        password: "",
-        email: result.email,
-        role: result.role
-      }),
+      (result) =>
+        setUser({
+          id: result.id,
+          username: result.username,
+          password: "",
+          email: result.email,
+          role: result.role,
+        }),
       localStorage.getItem("access_token")
     );
     getUserDetail(
@@ -36,7 +39,7 @@ const Profile = (props) => {
   };
 
   const deleteHandler = () => {
-    deleteUser(loginCbHandler,user.id);
+    deleteUser(loginCbHandler, user.id);
   };
 
   return (
@@ -44,7 +47,7 @@ const Profile = (props) => {
       <div className="row gutters">
         <div className="col-xl-4 col-lg-3 col-md-12 col-sm-12 col-12">
           <div className="card h-100">
-          <div className="card-header text-primary">Profile</div>
+            <div className="card-header text-primary">Profile</div>
             <div className="card-body">
               <div className="account-settings">
                 <div className="user-profile">
@@ -68,14 +71,13 @@ const Profile = (props) => {
           </div>
         </div>
 
-        <div className="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+        <div className="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 mt-3">
           <div className="card h-100 " style={{ width: "28rem" }}>
-          <div className="card-header text-primary">Edit Profile</div>
+            <div className="card-header text-primary">Edit Profile</div>
 
             <div className="card-body">
               <div className="row gutters">
-                <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                </div>
+                <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"></div>
                 <div className="col-xl-10 col-lg-6 col-md-6 col-sm-6 col-12">
                   <div className="form-group">
                     <label htmlFor="fullName">Username</label>
@@ -85,9 +87,10 @@ const Profile = (props) => {
                       id="fullName"
                       placeholder="Enter username"
                       value={user.username}
-                      onChange={(e) =>
-                        setUser({ ...user, username: e.target.value })
-                      }
+                      onChange={(e) => {
+                        setUser({ ...user, username: e.target.value });
+                        setDisabled(false);
+                      }}
                     />
                   </div>
                 </div>
@@ -103,9 +106,10 @@ const Profile = (props) => {
                       id="password"
                       placeholder="Enter New Password"
                       defaultValue=""
-                      onChange={(e) =>
-                        setUser({ ...user, password: e.target.value })
-                      }
+                      onChange={(e) => {
+                        setUser({ ...user, password: e.target.value });
+                        setDisabled(false);
+                      }}
                     />
                   </div>
                 </div>
@@ -121,9 +125,10 @@ const Profile = (props) => {
                       id="eMail"
                       placeholder="Enter email"
                       value={user.email}
-                      onChange={(e) =>
-                        setUser({ ...user, email: e.target.value })
-                      }
+                      onChange={(e) => {
+                        setUser({ ...user, email: e.target.value });
+                        setDisabled(false);
+                      }}
                     />
                   </div>
                 </div>
@@ -137,8 +142,9 @@ const Profile = (props) => {
                       name="submit"
                       className="btn btn-primary  mt-3"
                       onClick={() => submitHandler()}
+                      disabled={disabled}
                     >
-                      Update
+                      <MdSave size={30} /> Save
                     </button>
                     <button
                       type="button"
@@ -147,7 +153,7 @@ const Profile = (props) => {
                       className="btn btn-danger mt-3 mx-3"
                       onClick={() => deleteHandler()}
                     >
-                      Delete
+                      <MdOutlineDeleteForever size={30} /> Delete
                     </button>
                   </div>
                 </div>
