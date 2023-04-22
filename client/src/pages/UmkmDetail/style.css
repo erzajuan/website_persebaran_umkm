@@ -1,0 +1,244 @@
+.loading-body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  height: 100vh;
+  overflow-y: hidden;
+}
+
+.decor-default {
+    background-color: #ffffff;
+}
+.contact .controls {
+    position: relative;
+}
+
+.contact .controls .write {
+    position: absolute;
+    z-index: 2;
+    right: 20px;
+    bottom: -24px;
+    width: 48px;
+    height: 48px;
+    border-radius: 24px;
+    cursor: pointer;
+    box-shadow: 0 4px 5px #d8d8d8;
+    background: #39bee8  no-repeat 50% 50%;
+}
+.contact .controls .icon {
+    position: absolute;
+    z-index: 2;
+    top: 18px;
+    width: 16px;
+    height: 16px;
+    display: block;
+    cursor: pointer;
+}
+.contact .controls .cover {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    min-height: 150px;
+}
+.cover {
+    position: relative;
+    overflow: hidden;
+    height: 500px;
+}
+.contact .controls .cont {
+    position: absolute;
+    z-index: 2;
+    top: 80px;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+.contact .controls .avatar {
+    display: inline-block;
+    width: 90px;
+    height: 90px;
+    border-radius: 45px;
+    position: relative;
+    z-index: 2;
+}
+.contact .controls .name {
+    font-size: 20px;
+    line-height: 36px;
+    color: #ffffff;
+    margin: 0 0 10px;
+    position: relative;
+    z-index: 2;
+}
+.contact .controls .ui-mark {
+    display: inline-block;
+    border: 1px solid #ffffff;
+    font-size: 16px;
+    line-height: 32px;
+    color: #ffffff;
+    text-align: center;
+    margin: 0 2px;
+    padding: 0 26px;
+    border-radius: 2px;
+    position: relative;
+    z-index: 2;
+}
+
+.container-contact div[class^="col-"] {
+    position: relative;
+    min-height: 1px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+}
+.contact-description {
+    font-size: 16px;
+    line-height: 36px;
+}
+
+
+
+.product {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .product .caption {
+    margin-top: 15px;
+  }
+  
+  .product .caption h6 {
+    color: #455a64;
+  }
+  
+  .product .caption .price + .price {
+    margin-left: 15px;
+  }
+  
+  .product.tumbnail {
+    box-shadow: 0 5px 25px 0 transparent;
+    transition: 0.3s linear;
+    padding-top: 0;
+  }
+  
+  .product.tumbnail img:hover {
+    box-shadow: 0 5px 25px 0 rgba(0, 0, 0, 0.2);
+  }
+  
+  .single-product span {
+    display: inline-block;
+  }
+  
+  .single-product .rating .fa-star, .single-product .rating .fa-star-o {
+    font-size: 16px;
+    color: #f7d4a0;
+    margin-left: 2px;
+  }
+  
+  .single-product .rating + * {
+    margin-left: 15px;
+  }
+  
+  .single-product h1.h1-variant-2 {
+    margin-bottom: 20px;
+  }
+  
+  .single-product .caption:before {
+    content: '';
+    height: 100%;
+    display: inline-block;
+    vertical-align: middle;
+  }
+  
+  .single-product .caption span {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  
+  .single-product .caption .price {
+    font-weight: 400;
+  }
+  
+  .single-product .caption .price.sale {
+    color: #e75854;
+    font-size: 33px;
+  }
+  
+  .single-product .caption * + .price {
+    margin-left: 10.8%;
+  }
+  
+  @media (max-width: 1199px) {
+    .single-product .caption * + .price {
+      margin-left: 7.8%;
+    }
+  }
+  
+  .single-product .caption * + .quantity {
+    margin-left: 26px;
+  }
+  
+  .single-product .caption .info-list {
+    border-bottom: 1px solid #f3f3ed;
+    border-top: 1px solid #f3f3ed;
+    padding-top: 26px;
+    padding-bottom: 26px;
+    text-align: left;
+  }
+  
+  .single-product .caption .info-list dt, .single-product .caption .info-list dd {
+    display: inline-block;
+    line-height: 25px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  
+  .single-product .caption .info-list dt {
+    letter-spacing: 0.08em;
+    font-size: 12px;
+    color: #a7b0b4;
+    width: 35%;
+    text-transform: uppercase;
+  }
+  
+  .single-product .caption .info-list dd {
+    font-size: 15px;
+    color: #565452;
+    width: 62.5%;
+  }
+  
+  .single-product .caption .share span.small {
+    margin-top: 9px;
+  }
+  
+  @media (max-width: 991px) {
+    .single-product .caption .share span.small {
+      display: block;
+      margin-bottom: 15px;
+    }
+  }
+  
+  @media (max-width: 767px) {
+    .single-product .table-mobile tr {
+      padding-top: 0;
+    }
+    .single-product .table-mobile tr:before {
+      display: none;
+    }
+  }
+  
+  .price {
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: #2b2f3e;
+  }
+  
+  .price.sale {
+    color: #e75854;
+  }
+  
